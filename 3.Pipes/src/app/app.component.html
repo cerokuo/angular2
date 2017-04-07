@@ -1,0 +1,158 @@
+<div class="container">
+  <br>
+  <h1>Pipes</h1>
+  <hr>
+
+  <table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Var</th>
+      <th>Pipe</th>
+      <th>Product</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{name}}</td>
+      <td>Uppercase</td>
+      <td>{{name | uppercase}}</td>
+    </tr>
+    <tr>
+      <td>{{name}}</td>
+      <td>LowerCase</td>
+      <td>{{name | lowercase}}</td>
+    </tr>
+    <!--Slice:number, delete de number of characters you write. -->
+    <tr>
+      <td>{{name}}</td>
+      <td>slice:3</td>
+      <td>{{name | slice:3}}</td>
+    </tr>
+    <!--Slice:number-origin:number-end, delete the parameters that are not in the range of this numbers. -->
+    <tr>
+      <td>{{name}}</td>
+      <td>slice:0:3</td>
+      <td>{{name | slice:0:3}}</td>
+    </tr>
+    <!--Slice:number-origin:number-end,the same as before but with an array elements.. -->
+    <tr>
+      <td>{{array}}</td>
+      <td>slice:1:5</td>
+      <td>{{array | slice:1:5}}</td>
+    </tr>
+    <!-- number by default just give you 3 decimal digits, if you want more, you have to tell to the var number.  -->
+    <!-- {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}  -->
+    <tr>
+      <td>{{PI}}</td>
+      <td> number: 3.0-0 </td>
+      <td>{{PI | number:'3.0-0'}}</td>
+    </tr>
+    <tr>
+      <td>{{PI}}</td>
+      <td> number: 1.0-2 </td>
+      <td>{{PI | number:'1.0-2'}}</td>
+    </tr>
+    <!--Percent give you the % of the number number_expression | percent[:digitInfo]-->
+    <tr>
+      <td>{{a}}</td>
+      <td> percent </td>
+      <td>{{a | percent }}</td>
+    </tr>
+    <tr>
+      <td>{{a}}</td>
+      <td> percent: 2.2-2 </td>
+      <td>{{a | percent:'2.2-2' }}</td>
+    </tr>
+    <!--Create the currency of a value number_expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]  -->
+    <tr>
+      <td>{{salary}}</td>
+      <td> currency </td>
+      <td>{{salary | currency }}</td>
+    </tr>
+    <!-- Euro value  -->
+    <tr>
+      <td>{{salary}}</td>
+      <td> currency:'EUR' </td>
+      <td>{{salary | currency:'EUR' }}</td>
+    </tr>
+    <!--Adding true give us the symbol € instead of the EUR  -->
+    <tr>
+      <td>{{salary}}</td>
+      <td> currency:'EUR':true </td>
+      <td>{{salary | currency:'EUR':true }}</td>
+    </tr>
+    <!-- The same as before, but with 4 digits and 0 decimals.  -->
+    <tr>
+      <td>{{salary}}</td>
+      <td> currency:'EUR':true:'4.0-0' </td>
+      <td>{{salary | currency:'EUR':true:'4.0-0' }}</td>
+    </tr>
+    <tr>
+      <td>{{salary}}</td>
+      <td> number:'.2-2' </td>
+      <td>{{salary | number }}</td>
+    </tr>
+    <!-- Async pipe jsut write the message when the data arrive. -->
+    <tr>
+      <td>{{valorDePromesa}}</td>
+      <td> async </td>
+      <td>{{valorDePromesa | async}}</td>
+    </tr>
+    <!-- Date format-->
+    <tr>
+      <td>{{today}}</td>
+      <td> date </td>
+      <td>{{today | date}}</td>
+    </tr>
+    <tr>
+      <td>{{today}}</td>
+      <td> date:'medium' </td>
+      <td>{{today | date:'medium'}}</td>
+    </tr>
+    <tr>
+      <td>{{today}}</td>
+      <td> date:'MMMM - dd' </td>
+      <td>{{today | date:'MMMM - dd'}}</td>
+    </tr>
+    <!-- Personal Pipe: capitalizado  -->
+    <tr>
+      <td>{{name2}}</td>
+      <td> capitalizado </td>
+      <td>{{name2 | capital}}</td>
+    </tr>
+    <tr>
+      <td>{{name2}}</td>
+      <td> capitalizado </td>
+      <td>{{name2 | capital:false}}</td>
+    </tr>
+    <tr>
+      <td>{{name}}</td>
+      <td>
+          contrasena:{{activar}}
+          <br>
+          <button (click)="activar = !activar"
+          type="button"
+          class="btn btn-outline-primary">Activar/desactivar</button>
+      </td>
+      <td> {{name | contrasena:activar}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Slice</h4>
+<ul>
+  <li *ngFor="let item of array | slice:5:20">{{ item }}</li>
+</ul>
+
+<!-- Transform an object into a JSON version. -->
+<h4>JSON</h4>
+<pre>
+  {{heroe | json}}
+</pre>
+
+
+<h4>Youtube video <small>video</small></h4>
+<hr>
+<iframe width="560" height="315" [src]="video | domseguro:'https://www.youtube.com/embed/'" frameborder="0" allowfullscreen></iframe>
+
+</div>
