@@ -1,0 +1,69 @@
+<div *ngIf="artist" class=" container main-container animated fadeIn fast">
+<div class="row">
+
+  <div class="col-md-3 text-center">
+    <img [src]="artist.images | sinfoto" class="img-thumbnail img-circle">
+    <br>
+  </div>
+
+  <div class="cold-md-9">
+    <h3> {{artist.name}}<small> Popularity {{artist.popularity}}%</small></h3>
+    <hr>
+    <a [href]="artist.external_urls?.spotify"
+       class="btn btn-outline-success">
+       View page
+    </a>
+    <a [routerLink]="['/search']"
+       class="btn btn-outline-danger">
+       Return
+    </a>
+  </div>
+
+</div>
+
+</div>
+
+<div *ngIf="pistas" class="container">
+  <hr>
+  <h3> {{artist.name}} Top Songs</h3>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-inverse table-hover">
+          <thead>
+            <tr>
+              <th>{{ i + 1}}</th>
+              <th>Picture</th>
+              <th>Song</th>
+              <!-- <th>Almbum</th> -->
+              <th>Popularity</th>
+              <th>Preview</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let pista of pistas; let i = index">
+              <td>
+              <img [src]="pista.album?.images | sinfoto" class="img-fluid img-thumbnail img-50">
+              </td>
+              <td> {{pista.name}} </td>
+              <!-- <td>{{pista.almbum.name}}</td> -->
+              <td>{{pista.popularity}}</td>
+              <td>
+                <!-- <audio controls>
+                  <source [src]="pista.preview_url">
+                    Your browser is too old.
+                </audio> -->
+                <iframe [src]=" pista.uri | domseguro:'https://embed.spotify.com/?uri='" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

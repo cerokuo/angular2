@@ -8,6 +8,8 @@ export class SpotifyService {
 
   artistas:any [] = [];
   searchUrl:string = "https://api.spotify.com/v1/search";
+  artistUrl:string = "https://api.spotify.com/v1/artists/";
+
 
   constructor( private http:Http) { }
 
@@ -23,6 +25,32 @@ export class SpotifyService {
               this.artistas = res.json().artists.items;
               console.log(this.artistas);
               // return res.json().artists.items;
+            });
+  }
+
+  getArtist( id:string) {
+
+    let query = `${ id }`;
+    let url = this.artistUrl + query;
+
+
+    return this.http.get(url)
+            .map( res => {
+              console.log(res.json());
+              return res.json();
+            });
+  }
+
+  getTopArtist( id:string, country:string) {
+
+    let query = `${ id }/top-tracks?country=${ country }`;
+    let url = this.artistUrl + query;
+
+
+    return this.http.get(url)
+            .map( res => {
+              console.log(res.json().tracks);
+              return res.json().tracks;
             });
   }
 
